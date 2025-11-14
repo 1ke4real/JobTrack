@@ -92,3 +92,18 @@ RUN set -eux; \
 	composer dump-env prod; \
 	composer run-script --no-dev post-install-cmd; \
 	chmod +x bin/console; sync;
+
+# Node.js image for building frontend assets
+FROM node:24
+
+WORKDIR /app
+
+COPY ./frontend/package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
