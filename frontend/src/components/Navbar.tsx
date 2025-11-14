@@ -1,10 +1,8 @@
-import { useState } from 'react';
 import { NavLink } from "react-router";
 import {ROUTE_PATHS} from "../../router/routePath.ts";
-
+import {useLocation} from "react-router-dom";
 export const Navbar= () => {
-    const [currentPage, setCurrentPage] = useState('dashboard');
-    const [showModal, setShowModal] = useState(false);
+    const location = useLocation();
     return (<nav className="bg-white border-b border-gray-200 mb-8">
         <div className="max-w-7xl mx-auto px-6">
             <div className="flex items-center justify-between h-16">
@@ -14,7 +12,7 @@ export const Navbar= () => {
                        <NavLink to={ROUTE_PATHS.dashboard}>
                            <button
                                className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                                   currentPage === 'dashboard'
+                                   location.pathname === ROUTE_PATHS.dashboard
                                        ? 'bg-blue-50 text-blue-600'
                                        : 'text-gray-600 hover:bg-gray-50'
                                }`}
@@ -25,7 +23,7 @@ export const Navbar= () => {
                         <NavLink to={ROUTE_PATHS.applications}>
                            <button
                                className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                                   currentPage === 'applications'
+                                   location.pathname === ROUTE_PATHS.applications
                                        ? 'bg-blue-50 text-blue-600'
                                        : 'text-gray-600 hover:bg-gray-50'
                                }`}
@@ -36,7 +34,7 @@ export const Navbar= () => {
                         <NavLink to={ROUTE_PATHS.companies}>
                            <button
                                className={`px-4 py-2 rounded-md font-medium transition-colors ${
-                                   currentPage === 'applications'
+                                   location.pathname === ROUTE_PATHS.companies
                                        ? 'bg-blue-50 text-blue-600'
                                        : 'text-gray-600 hover:bg-gray-50'
                                }`}
@@ -46,11 +44,6 @@ export const Navbar= () => {
                        </NavLink>
                     </div>
                 </div>
-                {/*<div className="flex items-center gap-3">*/}
-                {/*    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-medium text-sm">*/}
-                {/*        U*/}
-                {/*    </div>*/}
-                {/*</div>*/}
             </div>
         </div>
     </nav>)
