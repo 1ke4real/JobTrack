@@ -59,3 +59,24 @@ sf: ## List all Symfony commands or pass the parameter "c=" to run a given comma
 
 cc: c=c:c ## Clear the cache
 cc: sf
+
+reset-db: ## Drops the database, creates it again and loads the fixtures, pass the parameter "f=" to load a specific fixture file, example: make reset-db f=AppFixtures
+	@$(eval f ?=)
+	@$(SYMFONY) doctrine:database:drop --force --if-exists
+	@$(SYMFONY) doctrine:database:create
+	@$(SYMFONY) doctrine:migrations:migrate --no-interaction
+	@if [ -z "$(f)" ]; then \
+		$(SYMFONY) doctrine:fixtures:load --no-interaction; \
+	else \
+		$(SYMFONY) doctrine:fixtures:load --no-interaction --fixtures=src/DataFixtures/$(f).php; \
+	fi
+## —— Migration Management 💾 ——————————————————————————————————————————————————
+reset-migration: reset-db ## Clears the Doctrine migration history table (doctrine_migration_versions) and generates a fresh initial migration.
+	@$(SYMFONY) doctrine:migrations:version --all --delete --no-interaction
+
+migration:
+	@$(SYMFONY) make:migration
+	@$(SYMFONY) doctrine:migrations:migrate --no-interaction
+
+fixtures: ## Load data fixtures into the database, pass the parameter "f=" to load a specific fixture file, example: make fixtures f=AppFixtures
+	@$(SYMFONY) doctrine:fixtures:load
