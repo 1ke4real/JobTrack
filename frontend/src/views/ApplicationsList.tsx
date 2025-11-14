@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {StatusBadge} from "../components/StatusBage.tsx";
 import { Calendar, Briefcase, Send, UserCheck, CheckCircle, XCircle, Eye, Trash2, Plus, Search, Building2, MapPin, ExternalLink, X } from 'lucide-react';
 import { Link } from "react-router-dom";
-export const Applications = () => {
+export const ApplicationsList = () => {
     const applications = [
         { id: 1, position: 'Développeur Full Stack', company: 'TechCorp', status: 'interview', date: '2025-01-15', nextFollowUp: '2025-11-18', source: 'LinkedIn' },
         { id: 2, position: 'React Developer', company: 'StartupXYZ', status: 'sent', date: '2025-01-10', nextFollowUp: '2025-11-20', source: 'WTTJ' },
