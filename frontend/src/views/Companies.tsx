@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Calendar, Briefcase, Send, UserCheck, CheckCircle, XCircle, Eye, Trash2, Plus, Search, Building2, MapPin, ExternalLink, X } from 'lucide-react';
+import {CompanyModal} from "../components/CompanyModal.tsx";
 
 export const Companies = () => {
 const [currentPage, setCurrentPage] = useState('dashboard');
@@ -85,6 +86,7 @@ return (
                 </tbody>
             </table>
         </div>
+        {showModal && <CompanyModal/>}
     </div>
 )
 
